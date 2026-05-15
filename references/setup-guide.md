@@ -31,11 +31,3 @@ brew install ffmpeg        # macOS
 2. 创建 API Key
 3. 填入 `config/credentials.env` 的 `GROQ_API_KEY`
 4. 不配也不影响，所有音频都走火山引擎
-
-## 费用预估
-
-| 场景 | 2.5h 播客 |
-|------|----------|
-| ASR 识别 | ¥5-10 |
-| TOS 存储+流量 | ¥0.04 |
-| 短音频 Groq | 免费 |

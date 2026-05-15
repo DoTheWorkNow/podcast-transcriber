@@ -45,11 +45,11 @@ bash scripts/transcribe.sh "URL" \
 
 ## Engine Routing
 
-| File Size | Diarization | Engine | Cost |
-|-----------|-------------|--------|------|
-| below 25MB | no | Groq Whisper | Free |
-| below 25MB | yes | Volcengine BigModel | ~¥2-3 |
-| over 25MB | any | Volcengine BigModel | ~¥5-10 |
+| File Size | Diarization | Engine |
+|-----------|-------------|--------|
+| below 25MB | no | Groq Whisper |
+| below 25MB | yes | Volcengine BigModel |
+| over 25MB | any | Volcengine BigModel |
 
 ## Output
 

@@ -14,8 +14,8 @@
 ```
 URL  →  download  →  engine select  →  TOS upload  →  ASR submit  →  poll  →  format  →  .md
                           │
-                          └─ < 25MB & no diar.  →  Groq Whisper (free)
-                          └─ otherwise          →  火山 BigModel (¥2-10)
+                          └─ < 25MB & no diar.  →  Groq Whisper
+                          └─ otherwise          →  火山 BigModel
 ```
 
 ## 支持平台
@@ -27,15 +27,15 @@ URL  →  download  →  engine select  →  TOS upload  →  ASR submit  →  p
 | 小宇宙 | `xiaoyuzhoufm.com/episode/` | HTML scrape |
 | Direct | `.mp3 .m4a .wav .ogg .aac .flac` | `curl` |
 
-## 引擎与成本
+## 引擎选路
 
-| 文件大小 | 说话人分离 | 引擎 | 成本 |
-|---------|----------|------|------|
-| < 25MB  | 否       | Groq Whisper | 免费 |
-| < 25MB  | 是       | 火山 BigModel | ~¥2-3 |
-| ≥ 25MB  | 任意     | 火山 BigModel | ~¥5-10 |
+| 文件大小 | 说话人分离 | 引擎 |
+|---------|----------|------|
+| < 25MB  | 否       | Groq Whisper |
+| < 25MB  | 是       | 火山 BigModel |
+| ≥ 25MB  | 任意     | 火山 BigModel |
 
-> 2.5 小时播客约 ¥5-10，含说话人分离与 TOS 流量。
+具体费用以各家控制台计费规则为准，本仓库不做预估。
 
 ## 快速开始
 
