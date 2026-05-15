@@ -13,7 +13,7 @@ done
 URL=""; DIARIZATION="true"; TITLE=""; OUTPUT="."; SPEAKER_NAMES=""
 while [[ $# -gt 0 ]]; do
   case "$1" in
-    --speaker-diarization) DIARIZATION="${2:-true}"; shift ;;
+    --speaker-diarization) DIARIZATION="true" ;;
     --no-diarization) DIARIZATION="false" ;;
     --title) TITLE="$2"; shift ;;
     --output) OUTPUT="$2"; shift ;;
