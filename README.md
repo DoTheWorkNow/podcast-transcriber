@@ -1,14 +1,17 @@
 # podcast-transcriber
 
 > 一键把 **B 站 / YouTube / 小宇宙 / 直链音频** 转成带说话人分离的 Markdown 逐字稿。
-> A Claude Code Skill for one-command podcast/video transcription with speaker diarization.
+> Agent-agnostic pipeline for one-command podcast/video transcription with speaker diarization.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Claude Code Skill](https://img.shields.io/badge/Claude%20Code-Skill-orange)](https://docs.claude.com/claude-code)
+[![Claude Code](https://img.shields.io/badge/Claude%20Code-Skill-orange)](https://docs.claude.com/claude-code)
+[![OpenClaw](https://img.shields.io/badge/OpenClaw-Compatible-1e90ff)](#在-agent-cli-中使用)
+[![Codex CLI](https://img.shields.io/badge/Codex%20CLI-Compatible-111111)](#在-agent-cli-中使用)
+[![Hermes Agent](https://img.shields.io/badge/Hermes%20Agent-Compatible-7b3fe4)](#在-agent-cli-中使用)
 
 ## 这是什么
 
-一个独立可运行的 Bash + Python 流水线，也可以打包成 Claude Code Skill。
+一个独立可运行的 Bash + Python 流水线，**任何能 shell out 的 agent CLI 都能调用**：Claude Code、OpenClaw、Codex CLI、Hermes Agent……
 丢一个 URL 进去，吐一个排版漂亮的 `.md` 出来，自带说话人分离、时间戳和统计。
 
 ```
@@ -76,7 +79,11 @@ bash scripts/transcribe.sh "URL" \
 bash scripts/transcribe.sh "URL" --no-diarization
 ```
 
-## 作为 Claude Code Skill 使用
+## 在 Agent CLI 中使用
+
+底层 `scripts/transcribe.sh` 是普通 Bash 脚本，凡是能执行 shell 命令的 agent 框架都能挂载它当工具。下面给出几个常见 agent 的接入方式。
+
+### Claude Code (Skill 安装)
 
 ```bash
 # 构建 .skill 分发包
@@ -91,6 +98,29 @@ cp dist/podcast-transcriber.skill ~/.claude/skills/
 > 把这个播客转成文字：https://www.xiaoyuzhoufm.com/episode/xxx
 
 触发词：`转文字`、`逐字稿`、`文字稿`、`转录`、`提取字幕`、`做逐字稿`。
+
+### OpenClaw / Codex CLI / Hermes Agent / 其他
+
+通用接入方式：把 `scripts/transcribe.sh` 注册为 agent 的一个 shell tool / function，把 SKILL.md frontmatter 里的 `description` + 触发词翻译成你目标 agent 的工具描述格式即可。
+
+```yaml
+# 通用 shell-tool 配置示意（语法因 agent 而异）
+name: podcast_transcribe
+description: |
+  Transcribe a podcast/video URL (Bilibili, YouTube, 小宇宙, direct audio)
+  into a speaker-diarized Markdown transcript.
+  Trigger on: 转文字 / 逐字稿 / 转录 / 提取字幕 / "transcribe this podcast".
+command: bash
+args:
+  - /path/to/podcast-transcriber/scripts/transcribe.sh
+  - "{{url}}"
+  - "--title"
+  - "{{title}}"
+  - "--output"
+  - "./transcripts"
+```
+
+欢迎为具体 agent 框架贡献开箱即用的配置示例，PR 到 `integrations/<agent-name>/`。
 
 ## 输出示例
 
