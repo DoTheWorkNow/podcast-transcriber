@@ -8,5 +8,6 @@ OUTPUT_DIR="${3:-.}"
 FILENAME="${TITLE//\//-}.md"
 
 mkdir -p "$OUTPUT_DIR"
-cp "$MD_FILE" "$OUTPUT_DIR/$FILENAME"
+# ditto 在 macOS 上能穿透 iCloud Drive 等受限路径的写权限；非 macOS / ditto 失败时回落到 cp
+ditto "$MD_FILE" "$OUTPUT_DIR/$FILENAME" 2>/dev/null || cp "$MD_FILE" "$OUTPUT_DIR/$FILENAME"
 echo "[save] ✅ $OUTPUT_DIR/$FILENAME"
